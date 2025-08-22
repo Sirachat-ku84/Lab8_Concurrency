@@ -1,14 +1,18 @@
 public class BankAccount {
     
-    private long balance ;
+    private long balance = 0;
 
     public void deposit(long amount){
-        balance += amount;
+        synchronized(this){
+            balance += amount;
+        }
     }
 
     public void withdraw(long amount){
-        if (balance >= amount) {
+        synchronized(this){
+            if (balance >= amount) {
             balance -= amount;
+            }
         }
     }
 
